@@ -10,6 +10,7 @@ library(sf)
 library(rgdal)
 library(geojsonio)
 library(tidyverse)
+![](D:/CASA/assignment1/assignment1/assignment1gis.jpg)
 ManchesterData<- read.csv("D:/CASA/assignment1/2018115215132969_CLSHHD_UNITmac/Data_CLSHHD_UNIT1.csv", header = TRUE, sep = ",")
 ManchesterMapSF <- read_shape("D:/CASA/assignment1/BoundaryDatamac/england_ct_2011.shp", as.sf = TRUE)
 qtm(ManchesterMapSF)
@@ -29,3 +30,6 @@ qtm(Machester_osm) +
   tm_compass(position = c("left", "bottom"),type = "arrow") + 
   tm_scale_bar(position = c("left", "bottom")) +
   tm_layout(title =c("Household is not deprived in any dimension","Household is deprived in 1 dimension"), legend.position = c("left", "bottom"))
+palette1<-scale_fill_continuous(low="white", high="orange", "Rate")
+labels<-labs(list(title="Household is not deprived in any dimension",x="Longitude", y="Latitude"))
+ggplot()+geom_sf(mapping = aes(geometry=geometry, fill=Household.is.not.deprived.in.any.dimension),data = BoroughDataMap)+theme_minimal()+palette1+labels
