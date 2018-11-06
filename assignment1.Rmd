@@ -1,0 +1,31 @@
+library(maptools)
+library(RColorBrewer)
+library(classInt)
+library(OpenStreetMap)
+library(sp)
+library(rgeos)
+library(tmap)
+library(tmaptools)
+library(sf)
+library(rgdal)
+library(geojsonio)
+library(tidyverse)
+ManchesterData<- read.csv("D:/CASA/assignment1/2018115215132969_CLSHHD_UNITmac/Data_CLSHHD_UNIT1.csv", header = TRUE, sep = ",")
+ManchesterMapSF <- read_shape("D:/CASA/assignment1/BoundaryDatamac/england_ct_2011.shp", as.sf = TRUE)
+qtm(ManchesterMapSF)
+BoroughDataMap <- append_data(ManchesterMapSF,ManchesterData, key.shp = "code", key.data = "GEO_CODE", ignore.duplicates = TRUE)
+library(tmap)
+library(tmaptools)
+tmap_mode("plot")
+Machester_osm <- read_osm(BoroughDataMap, type = "esri", zoom = NULL)
+qtm(Machester_osm) + 
+  tm_shape(BoroughDataMap) + 
+  tm_polygons(c("Household.is.not.deprived.in.any.dimension","Household.is.deprived.in.1.dimension"), 
+        style=c("jenks", "pretty"),
+        palette=list("YlOrBr", "Purples"),
+        auto.palette.mapping=FALSE,
+        title=c("Rate","Rate"),
+        alpha = 0.5) + 
+  tm_compass(position = c("left", "bottom"),type = "arrow") + 
+  tm_scale_bar(position = c("left", "bottom")) +
+  tm_layout(title =c("Household is not deprived in any dimension","Household is deprived in 1 dimension"), legend.position = c("left", "bottom"))
