@@ -1,0 +1,12 @@
+CDU_ID,GEO_CODE,GEO_LABEL,GEO_TYPE,GEO_TYP2,Deprivation; classification of household [E][S][W] : Total\ Classification of household deprivation - Unit : Households,Household is not deprived in any dimension ,Household is deprived in 1 dimension,Household is deprived in 2 dimensions,Household is deprived in 3 dimensions,Household is deprived in 4 dimensions
+44,E11000001,Greater Manchester,Counties,CNTY,1128066,443546,360388,239776,77347,7009
+333,E08000001,Bolton,Local Authorities,LA,116371,45456,37277,25079,7771,788
+334,E08000002,Bury,Local Authorities,LA,78113,34149,24674,14770,4141,379
+335,E08000003,Manchester,Local Authorities,LA,204969,70540,68763,45745,18104,1817
+336,E08000004,Oldham,Local Authorities,LA,89703,32828,29234,20597,6508,536
+337,E08000005,Rochdale,Local Authorities,LA,87552,31456,27874,20461,7085,676
+338,E08000006,Salford,Local Authorities,LA,103556,37672,33304,23660,8249,671
+339,E08000007,Stockport,Local Authorities,LA,121979,56445,38046,21322,5602,564
+340,E08000008,Tameside,Local Authorities,LA,94953,35619,30373,21616,6759,586
+341,E08000009,Trafford,Local Authorities,LA,94484,45282,28804,15889,4179,330
+342,E08000010,Wigan,Local Authorities,LA,136386,54099,42039,30637,8949,662

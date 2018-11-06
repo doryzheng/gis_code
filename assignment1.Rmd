@@ -1,3 +1,9 @@
+---
+title: "GIS Assignment1"
+author: "YURU ZHENG"
+date: "11/7/2018"
+output: pdf_document
+---
 library(maptools)
 library(RColorBrewer)
 library(classInt)

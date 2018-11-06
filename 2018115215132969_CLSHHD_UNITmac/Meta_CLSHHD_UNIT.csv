@@ -1,0 +1,61 @@
+CDU_FIELD_NAME,CENSUS_CELLNAME,TOPIC,CATEGORY,TOPIC_DESCRIPTION,
+F1000,QS119EW0005,"Deprivation, classification of household [E][S][W]",Household is deprived in 3 dimensions,"The dimensions of deprivation used to classify households are indicators based on four selected household characteristics. A household is deprived in a dimension if they meet one or more of the following conditions:
+<ul>
+<li/>Employment: Where any member of a household, who is not a full-time student, is either unemployed or long-term sick.
+<li/>Education: No person in the household has at least Level 2 education (see highest level of qualification), and no person aged 16 to 18 is a full-time student.
+<li/>Health and disability: Any person in the household has general health that is 'bad' or 'very bad' or has a long-term health problem.
+<li/>Housing: The household's accommodation is either overcrowded, with an occupancy rating -1 or less, or is in a shared dwelling, or has no central heating.
+</ul>
+<br/>
+A household is classified as being deprived in none, or one to four of these dimensions in any combination.",
+F1000,QS119EW0005,Unit,Households,The unit is for a particular count (e.g. people or households),
+F1001,QS119EW0006,"Deprivation, classification of household [E][S][W]",Household is deprived in 4 dimensions,"The dimensions of deprivation used to classify households are indicators based on four selected household characteristics. A household is deprived in a dimension if they meet one or more of the following conditions:
+<ul>
+<li/>Employment: Where any member of a household, who is not a full-time student, is either unemployed or long-term sick.
+<li/>Education: No person in the household has at least Level 2 education (see highest level of qualification), and no person aged 16 to 18 is a full-time student.
+<li/>Health and disability: Any person in the household has general health that is 'bad' or 'very bad' or has a long-term health problem.
+<li/>Housing: The household's accommodation is either overcrowded, with an occupancy rating -1 or less, or is in a shared dwelling, or has no central heating.
+</ul>
+<br/>
+A household is classified as being deprived in none, or one to four of these dimensions in any combination.",
+F1001,QS119EW0006,Unit,Households,The unit is for a particular count (e.g. people or households),
+F996,QS119EW0001,"Deprivation, classification of household [E][S][W]",Total\ Classification of household deprivation,"The dimensions of deprivation used to classify households are indicators based on four selected household characteristics. A household is deprived in a dimension if they meet one or more of the following conditions:
+<ul>
+<li/>Employment: Where any member of a household, who is not a full-time student, is either unemployed or long-term sick.
+<li/>Education: No person in the household has at least Level 2 education (see highest level of qualification), and no person aged 16 to 18 is a full-time student.
+<li/>Health and disability: Any person in the household has general health that is 'bad' or 'very bad' or has a long-term health problem.
+<li/>Housing: The household's accommodation is either overcrowded, with an occupancy rating -1 or less, or is in a shared dwelling, or has no central heating.
+</ul>
+<br/>
+A household is classified as being deprived in none, or one to four of these dimensions in any combination.",
+F996,QS119EW0001,Unit,Households,The unit is for a particular count (e.g. people or households),
+F997,QS119EW0002,"Deprivation, classification of household [E][S][W]",Household is not deprived in any dimension,"The dimensions of deprivation used to classify households are indicators based on four selected household characteristics. A household is deprived in a dimension if they meet one or more of the following conditions:
+<ul>
+<li/>Employment: Where any member of a household, who is not a full-time student, is either unemployed or long-term sick.
+<li/>Education: No person in the household has at least Level 2 education (see highest level of qualification), and no person aged 16 to 18 is a full-time student.
+<li/>Health and disability: Any person in the household has general health that is 'bad' or 'very bad' or has a long-term health problem.
+<li/>Housing: The household's accommodation is either overcrowded, with an occupancy rating -1 or less, or is in a shared dwelling, or has no central heating.
+</ul>
+<br/>
+A household is classified as being deprived in none, or one to four of these dimensions in any combination.",
+F997,QS119EW0002,Unit,Households,The unit is for a particular count (e.g. people or households),
+F998,QS119EW0003,"Deprivation, classification of household [E][S][W]",Household is deprived in 1 dimension,"The dimensions of deprivation used to classify households are indicators based on four selected household characteristics. A household is deprived in a dimension if they meet one or more of the following conditions:
+<ul>
+<li/>Employment: Where any member of a household, who is not a full-time student, is either unemployed or long-term sick.
+<li/>Education: No person in the household has at least Level 2 education (see highest level of qualification), and no person aged 16 to 18 is a full-time student.
+<li/>Health and disability: Any person in the household has general health that is 'bad' or 'very bad' or has a long-term health problem.
+<li/>Housing: The household's accommodation is either overcrowded, with an occupancy rating -1 or less, or is in a shared dwelling, or has no central heating.
+</ul>
+<br/>
+A household is classified as being deprived in none, or one to four of these dimensions in any combination.",
+F998,QS119EW0003,Unit,Households,The unit is for a particular count (e.g. people or households),
+F999,QS119EW0004,"Deprivation, classification of household [E][S][W]",Household is deprived in 2 dimensions,"The dimensions of deprivation used to classify households are indicators based on four selected household characteristics. A household is deprived in a dimension if they meet one or more of the following conditions:
+<ul>
+<li/>Employment: Where any member of a household, who is not a full-time student, is either unemployed or long-term sick.
+<li/>Education: No person in the household has at least Level 2 education (see highest level of qualification), and no person aged 16 to 18 is a full-time student.
+<li/>Health and disability: Any person in the household has general health that is 'bad' or 'very bad' or has a long-term health problem.
+<li/>Housing: The household's accommodation is either overcrowded, with an occupancy rating -1 or less, or is in a shared dwelling, or has no central heating.
+</ul>
+<br/>
+A household is classified as being deprived in none, or one to four of these dimensions in any combination.",
+F999,QS119EW0004,Unit,Households,The unit is for a particular count (e.g. people or households),
