@@ -1,0 +1,20 @@
+Introduction:
+With the rapid development of big data visualization applications, geographical information data visualization has received more and more attention. In the application of geographic data, the visualization of geographic information data is not only for the cool and good-looking, but also for the more concise and intuitive presentation of the laws of spatial distribution and the exploration of deeper information.
+Cartographic procedure:
+Two maps were draw by ArcGIS and R studio separately, after downloading boundary data and census aggressive data of Manchester in https://census.ukdataservice.ac.uk/.
+First 2 maps(assignment1giss.png) demonstrates classification of household deprivation in one dimension and household is not deprived in any dimension. Maps were drawn in geodatabase after join attribute table by matching codes. Manchester are classified into 4 quantities, using World map as a base map. According to map, Bolton is the most affluent borough. Oldham and Rochdale are deprived boroughs comparing with others. There are 2 maps in one layout by adjusting each layout manually.
+Rplot1 illustrates the same situation of map exported in ArcGIS with automatic set-up sized labels. Needed packages were installed at the beginning for library. Rplot2 explains household is not deprived in any dimension with longitude and latitude in another kind of layout.
+Comparison between a GUI-based piece of GIS Software and predominantly code-based software:
+These two softwares are both used to do spatial analysis in visualization and can export maps by different approach. ArcGIS is graphic tools and clicking step by step while R is mainly by coding.
+In terms of user interaction, as a GUI-based software, ArcGIS is more user-friendly due to the icon, menus and other toolbars. It ensures a smooth navigation and provides immediate updates with each change. By comparison, R requires programming fundamental and take mores for beginners to familiars with. Although the learning cycle of R is long and persistent. Plotting becomes efficient to pragmatic programmer.
+When it comes to work efficiency, the GUI has certain cultural and language independence and can improve to efficiency of visual target search for people without programming fundamental, also the they just want to deal with a few projects like the catalog of population in London. The GUI becomes slow to respond when attempting dozens of projects like 56 nations in China distributed throughtout the country due to its oft-repeated and tedious steps.  
+Thirdly, R have open source for public to install and upload packages from internet like github for free with variable mode of functions, by comparison, ArcGIS was released by ESRI( Environmental Systems Research Institute), which means users need licenses with standard tools. Although both of them have extensions(packages and toolbox). In CLI, users can combine packages and functions with certain codes to export map at one time which greatly improve the work efficiency. 
+Moreover, GUI environment has restrictions of capacity of running mass data point of the program developer, because ArcGIS is mainly for summary spatial analysis(geological map) which is unique technique of ArcGIS. As for CLI, we can instantly plot what we want without repetitive coding ,in other words, R is much better at handling large datasets than GIS software.
+To conclude, for those who did not anything about programming, ArcGIS is more conveniently for its interface. for those who have basic programming knowledge, they are more likely to use R to avoid same steps and save time. The choice of program ultimately depends on the structure of the data(shapefile, csv, geojson, Etc.) and capacity, the cartographer¡¯s requirements, preference.
+
+
+
+	
+
+	
+
