@@ -1,0 +1,206 @@
+#Load necessary Packages
+
+library(maptools)
+library(RColorBrewer)
+library(classInt)
+library(OpenStreetMap)
+library(sp)
+library(rgeos)
+library(tmap)
+library(tmaptools)
+library(sf)
+library(rgdal)
+library(geojsonio)
+library(spatstat)
+library(GISTools)
+library(spdep)
+library(ggplot2)
+library(raster)
+library(fpc)
+library(plyr)
+
+#Read the shapefile of Camden Wards Boundary into a simple features object and plot it.
+
+CamdenWardMapSF <- read_shape("D:/CASA/GIS/final/final/RforFinal/Camden.shp", as.sf = TRUE)
+qtm(CamdenWardMapSF)
+
+#Convert SF object into SP object and set it as British Natoional Grid(wHAT is BNG)
+BNG = "+init=epsg:27700"
+WGS = "+init=epsg:4326"
+CamdenWardMapSP <- as(CamdenWardMapSF, "Spatial")
+CamdenWardMapBNG <- spTransform(CamdenWardMapSP,BNG)
+
+
+#Read on street crime in Camden from https://opendata.camden.gov.uk/resource/yv9v-if37.geojson and plot interactive maps 
+OnStreetCrime <- geojson_read("https://opendata.camden.gov.uk/resource/yv9v-if37.geojson", what = "sp")
+OnStreetCrimeBNG <- spTransform(OnStreetCrime, BNG)
+r <- poly.counts(OnStreetCrimeBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$OnStreetCrimeCount<-r
+CamdenWardMapBNG@data$OnStreetCrimeDensity <- CamdenWardMapBNG$OnStreetCrimeCount/poly.areas(CamdenWardMapBNG)
+tm_shape(CamdenWardMapBNG) +
+    tm_polygons("OnStreetCrimeDensity", 
+        style="jenks",
+        palette="YlOrBr",
+        auto.palette.mapping=FALSE,
+        title="On Street Crime Density in Camden")
+
+#Same as all types of crime in Camden
+
+Anti_socialSF <- read_shape("D:/CASA/GIS/final/final/XYAnti_social_beh.shp", as.sf = TRUE)
+BicycleSF <- read_shape("D:/CASA/GIS/final/final/XYBicycle_theft.shp", as.sf = TRUE)
+BurglarySF <- read_shape("D:/CASA/GIS/final/final/XYBurglary.shp", as.sf = TRUE)
+CrimeDamageArsonSF <- read_shape("D:/CASA/GIS/final/final/XYCriminal_damage_and_arson.shp", as.sf = TRUE)
+drugSF <- read_shape("D:/CASA/GIS/final/final/XYdrugs.shp", as.sf = TRUE)
+otherCrimeSF <- read_shape("D:/CASA/GIS/final/final/XYOther_crime.shp", as.sf = TRUE)
+otherTheftSF <- read_shape("D:/CASA/GIS/final/final/XYOther_theft.shp", as.sf = TRUE)
+publicOrderSF <- read_shape("D:/CASA/GIS/final/final/XYpublic_order.shp", as.sf = TRUE)
+robberySF <- read_shape("D:/CASA/GIS/final/final/XYrobbery.shp", as.sf = TRUE)
+shopliftingSF <- read_shape("D:/CASA/GIS/final/final/XYshoplifting.shp", as.sf = TRUE)
+theftFromPersonSF <- read_shape("D:/CASA/GIS/final/final/XYtheft_from_the_person.shp", as.sf = TRUE)
+vehicleSF <- read_shape("D:/CASA/GIS/final/final/XYvehicle_crime.shp", as.sf = TRUE)
+sexualSF <- read_shape("D:/CASA/GIS/final/final/XYViolence_and_sexual_offences.shp", as.sf = TRUE)
+
+Anti_socialSP <- as(Anti_socialSF, "Spatial")
+BicycleSP <- as(BicycleSF, "Spatial")
+BurglarySP <- as(BurglarySF, "Spatial")
+CrimeDamageArsonSP <- as(CrimeDamageArsonSF, "Spatial")
+drugSP <- as(drugSF, "Spatial")
+otherCrimeSP <- as(otherCrimeSF, "Spatial")
+otherTheftSP <- as(otherTheftSF, "Spatial")
+publicOrderSP <- as(publicOrderSF, "Spatial")
+robberySP <- as(robberySF, "Spatial")
+shopliftingSP <- as(shopliftingSF, "Spatial")
+vehicleSP <- as(vehicleSF, "Spatial")
+sexualSP <- as(sexualSF, "Spatial")
+theftFromPersonSP <- as(theftFromPersonSF, "Spatial")
+
+Anti_socialBNG <- spTransform(Anti_socialSP,BNG)
+BicycleBNG <- spTransform(BicycleSP,BNG)
+BurglaryBNG <- spTransform(BurglarySP,BNG)
+CrimeDamageArsonBNG <- spTransform(CrimeDamageArsonSP,BNG)
+drugBNG <- spTransform(drugSP,BNG)
+otherCrimeBNG <- spTransform(otherCrimeSP,BNG)
+publicOrderBNG <- spTransform(publicOrderSP,BNG)
+robberyBNG <- spTransform(robberySP,BNG)
+shopliftingBNG <- spTransform(shopliftingSP,BNG)
+vehicleBNG <- spTransform(vehicleSP,BNG)
+sexualBNG <- spTransform(sexualSP,BNG)
+otherTheftBNG <- spTransform(otherTheftSP,BNG)
+theftFromPersonBNG <- spTransform(theftFromPersonSP,BNG)
+
+#Add all types of crime as columns in spatialPolygonsDataframe and calculate a density of each type of crime in each ward 
+res <- poly.counts(Anti_socialBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$Anti_socialCount<-res
+CamdenWardMapBNG@data$Anti_socialDensity <- CamdenWardMapBNG$Anti_socialCount/poly.areas(CamdenWardMapBNG)
+
+res1 <- poly.counts(BicycleBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$BicycleCount<-res1
+CamdenWardMapBNG@data$BicycleDensity <- CamdenWardMapBNG$BicycleCount/poly.areas(CamdenWardMapBNG)
+
+res2 <- poly.counts(BurglaryBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$BurglaryCount<-res2
+CamdenWardMapBNG@data$BurglaryDensity <- CamdenWardMapBNG$BurglaryCount/poly.areas(CamdenWardMapBNG)
+
+res3 <- poly.counts(CrimeDamageArsonBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$CrimeDamageArsonCount<-res3
+CamdenWardMapBNG@data$CrimeDamageArsonDensity <- CamdenWardMapBNG$CrimeDamageArsonCount/poly.areas(CamdenWardMapBNG)
+
+res4 <- poly.counts(drugBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$drugCount<-res4
+CamdenWardMapBNG@data$drugDensity <- CamdenWardMapBNG$drugCount/poly.areas(CamdenWardMapBNG)
+
+res5 <- poly.counts(otherCrimeBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$otherCrimeCount<-res5
+CamdenWardMapBNG@data$otherCrimeDensity <- CamdenWardMapBNG$otherCrimeCount/poly.areas(CamdenWardMapBNG)
+
+res6 <- poly.counts(publicOrderBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$publicOrderCount<-res6
+CamdenWardMapBNG@data$publicOrderDensity <- CamdenWardMapBNG$publicOrderCount/poly.areas(CamdenWardMapBNG)
+
+res7 <- poly.counts(robberyBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$robberyCount<-res7
+CamdenWardMapBNG@data$robberyDensity <- CamdenWardMapBNG$robberyCount/poly.areas(CamdenWardMapBNG)
+
+res8 <- poly.counts(shopliftingBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$shopliftingCount<-res8
+CamdenWardMapBNG@data$shopliftingDensity <- CamdenWardMapBNG$shopliftingCount/poly.areas(CamdenWardMapBNG)
+
+res9 <- poly.counts(vehicleBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$vehicleCount<-res9
+CamdenWardMapBNG@data$vehicleDensity <- CamdenWardMapBNG$vehicleCount/poly.areas(CamdenWardMapBNG)
+
+res10 <- poly.counts(sexualBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$sexualCount<-res10
+CamdenWardMapBNG@data$sexualDensity <- CamdenWardMapBNG$sexualCount/poly.areas(CamdenWardMapBNG)
+
+res11 <- poly.counts(otherTheftBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$otherTheftCount<-res11
+CamdenWardMapBNG@data$otherTheftDensity <- CamdenWardMapBNG$otherTheftCount/poly.areas(CamdenWardMapBNG)
+
+res12 <- poly.counts(theftFromPersonBNG, CamdenWardMapBNG)
+CamdenWardMapBNG@data$theftFromPersonCount<-res12
+CamdenWardMapBNG@data$theftFromPersonDensity <- CamdenWardMapBNG$theftFromPersonCount/poly.areas(CamdenWardMapBNG)
+
+##a choropleth map of all types of on street crime density in Camden
+tm_shape(CamdenWardMapBNG) +
+    tm_polygons(c("Anti_socialDensity","BicycleDensity","CrimeDamageArsonDensity", "sexualDensity","drugDensity","otherCrimeDensity","publicOrderDensity","robberyDensity","shopliftingDensity","vehicleDensity","theftFromPersonDensity","otherTheftDensity"), 
+        style=c("jenks","jenks","jenks","jenks","jenks","jenks","jenks","jenks","jenks","jenks","jenks","jenks"),
+        palette=list("YlOrBr","YlOrBr","YlOrBr","YlOrBr","YlOrBr","YlOrBr","YlOrBr","YlOrBr","YlOrBr","YlOrBr","YlOrBr","YlOrBr"),
+        auto.palette.mapping=FALSE,
+        title=c("Anti Social Crime Density","Bicycle Theft Density","Crime Damage and Arson Density","Violence and Sexual Offence Density","Drug Density","Other Crime Density","Public order Density","Robbery Density","Sholifting Densty","Vehicle Crime Density","Theft From Person Density", "Other Theft Density"))
+tmap_options(limits = c(facets.view = 12))
+#Calculate the centroids of all Wards in Camden
+coordsW <- coordinates(CamdenWardMapBNG)
+plot(coordsW)
+#Generate a spatial weights matrix.
+CWard_nb <- poly2nb(CamdenWardMapBNG, queen=T)
+plot(CWard_nb, coordinates(coordsW), col="red")
+plot(CamdenWardMapBNG, add=T)
+
+#create a spatial weights object from these weights
+Cward.lw <- nb2listw(CWard_nb, style="C")
+head(Cward.lw$neighbours)
+#moran's I test to answer the question – “are the values for neighbouring features more similar than those for all other features?” and find hot spots.
+I_CWard_Global_Density <- moran.test(CamdenWardMapBNG@data$sexualDensity, Cward.lw)
+I_CWard_Global_Density
+head(I_CWard_Local_Density)
+CamdenWardMapBNG@data$BLocI <- I_CWard_Local[,1]
+CamdenWardMapBNG@data$BLocIz <- I_CWard_Local[,4]
+CamdenWardMapBNG@data$BLocIR <- I_CWard_Local_Density[,1]
+CamdenWardMapBNG@data$BLocIRz <- I_CWard_Local_Density[,4]
+MoranColours<- rev(brewer.pal(8, "RdGy"))
+tm_shape(CamdenWardMapBNG) +
+    tm_polygons("BLocIRz",
+        style="fixed",
+        breaks=breaks1,
+        palette=MoranColours,
+        midpoint=NA,
+        title="Local Moran's I, Voilence and sexual offense in Camden")
+
+
+#A point pattern analysis using ripley's K and taking bicycle crime as an example
+
+Bicycle.ppp <- ppp(x=sexualBNG@coords[,1],y=sexualBNG@coords[,2],window=window)
+plot(Bicycle.ppp,pch=16,cex=0.5, main="Violence and sexual offence in Camden")
+K <- Kest(Bicycle.ppp, correction="border")
+plot(K)
+
+#figure out where the clustering occurs using DBSCAN and plot it with the base map of Camden.
+SPoint <- data.frame(sexualBNG@coords[,1:2])
+db <- fpc::dbscan(SPoint, eps = 280, MinPts = 500)
+plot(db, SPoint, main = "DBSCAN Output", frame = F)
+db
+SPoint$cluster <- db$cluster
+chulls <- ddply(SPoint, .(cluster), function(df) df[chull(df$coords.x1, df$coords.x2), ])
+chulls <- subset(chulls, cluster>=1)
+dbplot <- ggplot(data=SPoint, aes(coords.x1,coords.x2, colour=cluster, fill=cluster)) 
+dbplot <- dbplot + geom_point()
+dbplot <- dbplot + geom_polygon(data = chulls, aes(coords.x1,coords.x2, group=cluster), alpha = 0.5)
+dbplot + theme_bw() + coord_equal()
+latlong <- "+init=epsg:4326" 
+CamdenWGS <-spTransform(CamdenWardMapBNG, CRS(latlong))
+CamdenWGS@bbox
+basemap<-openmap(c(51.5126510,-0.2135214),c(51.5729734,-0.1053599), zoom=NULL,"stamen-toner")
+basemap_bng<-openproj(basemap, projection=BNG)
+autoplot(basemap_bng) + geom_point(data=SPoint, aes(coords.x1,coords.x2, colour=cluster, fill=cluster)) + geom_polygon(data = chulls, aes(coords.x1,coords.x2, group=cluster, fill=cluster), alpha = 0.5)  
+
